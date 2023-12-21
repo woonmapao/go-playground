@@ -1,0 +1,14 @@
+This style of development can be slow and annoying to read.
+When Go developers stray from the “default” type for any
+given type family, the code can get messy quickly.
+
+Unless you have a good reason to, stick to the following types:
+
+    bool
+    string
+    int
+    uint32
+    byte
+    rune
+    float64
+    complex128
