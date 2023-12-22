@@ -1,56 +1,56 @@
-package main
+package slices
 
 import "fmt"
 
-func main() {
-	// WE USE SLICES > ARRAY MOST OF THE TIME ! (99%)
+// Function to demonstrate basic operations on slices
+func BasicSliceOperations() {
+	fmt.Println("Basic Slice Operations Example:")
 
-	// arrays
-	var myArray [10]int // ---> [0 0 0 0 0 0 0 0 0 0]
-	primes := [6]int{2, 3, 5, 7, 11, 13}
+	// Declare and initialize a slice
+	numbers := []int{1, 2, 3, 4, 5}
+	fmt.Println("Original Slice:", numbers)
 
-	myArray[1] = 1
-	primes[1] = 1
+	// Accessing elements in a slice
+	fmt.Println("First Element:", numbers[0])
+	fmt.Println("Last Element:", numbers[len(numbers)-1])
 
-	// slices
-	var mySlice []int
-	fmt.Println(mySlice)
+	// Slicing a slice
+	subSlice := numbers[1:4]
+	fmt.Println("Sub-slice:", subSlice)
 
-	// func make([]Type, len, cap) []T
-	mySlice2 := make([]int, 5, 10)
-	// the capacity argument is usually omitted
-	// and defaults to the length
-	fmt.Println(len(mySlice2))
+	// Modifying a slice
+	numbers[2] = 99
+	fmt.Println("Modified Slice:", numbers)
 
-	matrix1 := createMatrix(5, 5)
-	fmt.Println(matrix1)
-	matrix2 := createMatrix2(5, 5)
-	fmt.Println(matrix2)
-
-	// don't do this !
-	// someSlice = append(otherSlide, element)
-
+	// Appending to a slice
+	numbers = append(numbers, 6, 7, 8)
+	fmt.Println("After Append:", numbers)
 }
 
-func createMatrix(rows, cols int) [][]int {
+// Function to demonstrate iterating over a slice
+func IterateOverSlice() {
+	fmt.Println("Iterate Over Slice Example:")
 
-	myMatrix := make([][]int, rows)
-	for i := 0; i < cols; i++ {
-		myMatrix[i] = make([]int, cols)
+	// Declare and initialize a slice
+	fruits := []string{"Apple", "Banana", "Orange", "Mango"}
+
+	// Iterate over the slice using range
+	for index, fruit := range fruits {
+		fmt.Printf("Index: %d, Fruit: %s\n", index, fruit)
 	}
-	return myMatrix
 }
 
-func createMatrix2(rows, cols int) [][]int {
+// Function to demonstrate the make function for slices
+func MakeFunctionForSlices() {
+	fmt.Println("Make Function for Slices Example:")
 
-	myMatrix := make([][]int, rows)
+	// Creating a slice with make
+	intSlice := make([]int, 3, 5)
+	fmt.Println("Initial Slice:", intSlice)
+	fmt.Printf("Length: %d, Capacity: %d\n", len(intSlice), cap(intSlice))
 
-	for i := 0; i < rows; i++ {
-
-		myMatrix[i] = make([]int, cols)
-		for j := 0; j < cols; j++ {
-			myMatrix[i][j] = i * j
-		}
-	}
-	return myMatrix
+	// Appending elements to the slice
+	intSlice = append(intSlice, 1, 2, 3)
+	fmt.Println("After Append:", intSlice)
+	fmt.Printf("Length: %d, Capacity: %d\n", len(intSlice), cap(intSlice))
 }

@@ -1,4 +1,4 @@
-package main
+package interfaces
 
 import "fmt"
 
@@ -15,75 +15,45 @@ import "fmt"
 			IsPickup() bool		<-----
 		}
 */
-type shape interface {
-	area() float64
-	perimeter() float64
+// Define a simple Shape interface
+type Shape interface {
+	Area() float64
+	Perimeter() float64
 }
 
-// --------------------------------------
-type rectangle struct {
-	width, height float64
+// Define a Rectangle struct that implements the Shape interface
+type Rectangle struct {
+	Width  float64
+	Height float64
 }
 
-func (r rectangle) area() float64 {
-	return r.width * r.height
+// Implement the Area method for Rectangle
+func (r Rectangle) Area() float64 {
+	return r.Width * r.Height
 }
 
-func (r rectangle) perimeter() float64 {
-	return 2*r.width + 2*r.height
+// Implement the Perimeter method for Rectangle
+func (r Rectangle) Perimeter() float64 {
+	return 2*r.Width + 2*r.Height
 }
 
-// --------------------------------------
-type circle struct {
-	radius float64
+// Define a Circle struct that implements the Shape interface
+type Circle struct {
+	Radius float64
 }
 
-func (c circle) area() float64 {
-	return 3.14 * c.radius * c.radius
+// Implement the Area method for Circle
+func (c Circle) Area() float64 {
+	return 3.14 * c.Radius * c.Radius
 }
 
-func (c circle) perimeter() float64 { // (diameter)
-	return 2 * 3.14 * c.radius
+// Implement the Perimeter method for Circle
+func (c Circle) Perimeter() float64 {
+	return 2 * 3.14 * c.Radius
 }
 
-// --------------------------------------
-
-func getAll(s shape) {
-	fmt.Println(s.area())
-	fmt.Println(s.perimeter())
-	fmt.Println("=============")
-}
-
-// Type Assertions
-func getBetterAll(s shape) (string, float64, float64) {
-	c, ok := s.(circle)
-	if ok {
-		return "circle", c.area(), c.perimeter()
-	}
-	r, ok := s.(rectangle)
-	if ok {
-		return "rectangle", r.area(), r.perimeter()
-	}
-	return "", 0.0, 0.0
-}
-
-func main() {
-
-	mysteryShape1 := circle{
-		radius: 1.2,
-	}
-
-	mysteryShape2 := rectangle{
-		width:  2.1,
-		height: 1.9,
-	}
-
-	getAll(mysteryShape1)
-
-	getAll(mysteryShape2)
-
-	fmt.Println(getBetterAll(mysteryShape1))
-
-	fmt.Println(getBetterAll(mysteryShape2))
-
+// Function to calculate and print the area and perimeter of a shape
+func PrintShapeInfo(s Shape) {
+	fmt.Printf("Area: %.2f\n", s.Area())
+	fmt.Printf("Perimeter: %.2f\n", s.Perimeter())
 }
